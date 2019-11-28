@@ -18,4 +18,12 @@ public class AccountDto {
     public String getId() {
         return id;
     }
+
+    public String getChallengeParameters() {
+        return challengeParameters;
+    }
+
+    public String getChallenge() {
+        return challenge;
+    }
 }

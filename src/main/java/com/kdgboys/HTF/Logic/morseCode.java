@@ -13,7 +13,7 @@ public class morseCode {
             "-.--", "--..", ".----", "..---", "...--", "....-", ".....",
             "-....", "--...", "---..", "----.", "-----", "-.-.--", "--..--", "..--..", ".-.-.-", ".----.",};
 
-    private static String decode(String morseCode) {
+    public static String decode(String morseCode) {
         String build = "";
         String change = morseCode.trim();
         String[] words = change.split("   ");
@@ -28,9 +28,5 @@ public class morseCode {
         }
 
         return build.toUpperCase();
-    }
-
-    public static void main(String[] args) {
-        System.out.println(decode("-. ... - .--- ..-. -..- --.- -.. .-- -.."));
     }
 }

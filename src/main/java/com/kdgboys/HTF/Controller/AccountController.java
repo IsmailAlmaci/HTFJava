@@ -9,47 +9,55 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.client.RestTemplate;
 
-import static com.sun.org.apache.xerces.internal.util.PropertyState.is;
+import java.util.ArrayList;
+import java.util.List;
 
 @RestController
 public class AccountController {
-
-    private static Page<AccountDto[]> getJson()
+    private static Page<AccountDto> getJson()
     {
         RestTemplate restTemplate = new RestTemplate();
-        Page<AccountDto[]> account = new Page<>();
+        Page<AccountDto> account = new Page<>();
         String url
                 = "http://vault.bewire.org/accounts";
-        ResponseEntity<Page<AccountDto[]>> response
-                = restTemplate.getForEntity(url, (Class<Page<AccountDto[]>>)account.getClass());
+        ResponseEntity<Page<AccountDto>> response
+                = restTemplate.getForEntity(url, (Class<Page<AccountDto>>)account.getClass());
         return response.getBody();
     }
 
-    private String getUrl()
+    private ArrayList<AccountDto> getChallenges()
     {
-        return "http://vault.bewire.org/accounts" + getJson().getContent()[0].getId();
+        return getJson().getContent();
     }
 
-    private AccountDto getAccount(String url)
+    public AccountDto post(String id, String answer)
     {
         RestTemplate restTemplate = new RestTemplate();
-        ResponseEntity<AccountDto> response
-                = restTemplate.getForEntity(url, AccountDto.class);
-        return response.getBody();
+        String url = "http://vault.bewire.org/accounts/" + id;
+
+        HttpEntity<SolveAccountCommand> request = new HttpEntity<>(new SolveAccountCommand(answer));
+        AccountDto result = restTemplate.postForObject(url, request, AccountDto.class);
+        return result;
     }
 
+    @GetMapping(value ="/post")
     public AccountDto post()
     {
-        RestTemplate restTemplate = new RestTemplate();
-        String url = "http://vault.bewire.org/accounts/9e02c842-6162-4827-8d04-64f9649d4133";
+        return post("b1eaaa67-8e69-4ac4-bc56-98c6e9782f5e", "pudfriueshq");
+    }
 
-        HttpEntity<SolveAccountCommand> request = new HttpEntity<>(new SolveAccountCommand("zfscacsrzayzhx"));
-        AccountDto answer = restTemplate.postForObject(url, request, AccountDto.class);
-        return answer;
+    @GetMapping(value = "/challenges")
+    public ArrayList<String> challenges()
+    {
+        ArrayList<String> list = new ArrayList<>();
+        for (AccountDto account : getChallenges()) {
+            list.add(account.getChallenge());
+        }
+        return list;
     }
 
     @GetMapping(value = "/account")
-    public AccountDto account() {
-        return post();
+    public List<AccountDto> account() {
+        return getChallenges();
     }
 }
