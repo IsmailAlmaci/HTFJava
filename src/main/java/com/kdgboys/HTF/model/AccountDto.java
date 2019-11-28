@@ -13,5 +13,5 @@ public class AccountDto {
     private String challenge;
     private int amount;
     private AccountLevel accountLevel;
-    private String challangeParameters;
+    private String challengeParameters;
 }
