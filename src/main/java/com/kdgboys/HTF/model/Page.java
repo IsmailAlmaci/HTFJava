@@ -15,4 +15,8 @@ public class Page<T> {
     private Sort sort;
     private long totalElements;
     private int totalPages;
+
+    public T getContent() {
+        return content;
+    }
 }

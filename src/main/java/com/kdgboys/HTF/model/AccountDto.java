@@ -14,4 +14,8 @@ public class AccountDto {
     private int amount;
     private AccountLevel accountLevel;
     private String challengeParameters;
+
+    public String getId() {
+        return id;
+    }
 }
