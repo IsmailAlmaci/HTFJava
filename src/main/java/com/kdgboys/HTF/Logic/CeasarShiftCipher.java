@@ -1,6 +1,6 @@
 package com.kdgboys.HTF.Logic;
 
-public class ceasarShiftCipher {
+public class CeasarShiftCipher {
     public void ceasarShiftCipher(CharSequence input) {
         StringBuilder output = new StringBuilder();
         for (int i = 1; i <= 25; i++) {

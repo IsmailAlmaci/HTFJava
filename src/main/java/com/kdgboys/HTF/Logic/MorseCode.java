@@ -1,7 +1,7 @@
 package com.kdgboys.HTF.Logic;
 import java.util.Arrays;
 
-public class morseCode {
+public class MorseCode {
 
     private static String[] alpha = {"a", "b", "c", "d", "e", "f", "g", "h", "i", "j",
             "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v",
