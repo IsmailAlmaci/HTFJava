@@ -1,10 +1,11 @@
 package com.kdgboys.HTF.Logic;
 
-public class PlatinumLogic {
+public class ceasarShiftCipher {
     public void ceasarShiftCipher(CharSequence input) {
         StringBuilder output = new StringBuilder();
         for (int i = 1; i <= 25; i++) {
             output.append(checkAsciiNumber((int)input.charAt(i)+i));
+            //TODO instead of stout post
             System.out.println(output);
             output = new StringBuilder();
         }
